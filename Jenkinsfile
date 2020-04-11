@@ -27,11 +27,17 @@ pipeline {
                     //Recupérer le projet security : projet Ansible avec l'inventaire des infrastructures et pour chaque infra ses serveurs
 
                     //Lancer le test avec le descripteur de tests mis sur le projet
-                    sh "inspec exec \
-                        --chef-license accept-silent \
-                        linux-baseline \
-                        -t ssh://devops:devops@192.168.33.37 \
-                        --reporter cli junit:artifacts/testresults.xml"
+                    try {
+                        sh "inspec exec \
+                            --chef-license accept-silent \
+                            linux-baseline \
+                            -t ssh://devops:devops@192.168.33.37 \
+                            --reporter cli junit:artifacts/testresults.xml"
+                    } catch (Exception e) {
+                        error("Le build a échoué à cause de inspec")
+                    } finally {
+                        junit 'artifacts/*.xml'
+                    }
                 }                
             }
         }
