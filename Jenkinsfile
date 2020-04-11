@@ -27,7 +27,7 @@ pipeline {
                     //Recupérer le projet security : projet Ansible avec l'inventaire des infrastructures et pour chaque infra ses serveurs
 
                     //Lancer le test avec le descripteur de tests mis sur le projet
-                    sh "inspec exec linux-baseline ssh://devops:devops@192.168.33.37 --reporter cli junit:artifacts/testresults.xml"
+                    sh "inspec exec --chef-license accept-silent linux-baseline ssh://devops:devops@192.168.33.37 --reporter cli junit:artifacts/testresults.xml"
                 }                
             }
         }
