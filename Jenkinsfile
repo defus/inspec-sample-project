@@ -29,9 +29,9 @@ pipeline {
                     //Lancer le test avec le descripteur de tests mis sur le projet
                     sh "inspec exec \
                         --chef-license accept-silent \
+                        linux-baseline \
                         -t ssh://devops:devops@192.168.33.37 \
-                        --reporter cli junit:artifacts/testresults.xml \
-                        linux-baseline"
+                        --reporter cli junit:artifacts/testresults.xml"
                 }                
             }
         }
