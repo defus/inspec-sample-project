@@ -4,14 +4,14 @@ pipeline {
 
     stages {
         stage('Checkout') {
-            agent { label 'jenkins-security-1' }
+            agent { label 'linux-security-1' }
             steps {
                 checkout([$class: 'GitSCM'])
             }
         }
 
         stage('Run inspec tests') {
-            agent { label 'jenkins-security-1' }
+            agent { label 'linux-security-1' }
             steps {
                 script {
                     //S'assurer que le repertoire des contrôles est bien en place sur le serveur Jenkins security
