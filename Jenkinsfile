@@ -19,7 +19,7 @@ pipeline {
                         $class: 'GitSCM', 
                         branches: [[name: 'refs/heads/master']], 
                         doGenerateSubmoduleConfigurations: false, 
-                        extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'k8sspray']], 
+                        extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'linux-baseline']], 
                         submoduleCfg: [], 
                         userRemoteConfigs: [[url: 'https://github.com/dev-sec/linux-baseline.git']]
                     ])
@@ -27,7 +27,11 @@ pipeline {
                     //Recupérer le projet security : projet Ansible avec l'inventaire des infrastructures et pour chaque infra ses serveurs
 
                     //Lancer le test avec le descripteur de tests mis sur le projet
-                    sh "inspec exec --chef-license accept-silent linux-baseline ssh://devops:devops@192.168.33.37 --reporter cli junit:artifacts/testresults.xml"
+                    sh "inspec exec \
+                        --chef-license accept-silent \
+                        linux-baseline \
+                        ssh://devops:devops@192.168.33.37 \
+                        --reporter cli junit:artifacts/testresults.xml"
                 }                
             }
         }
