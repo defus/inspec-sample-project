@@ -30,7 +30,7 @@ pipeline {
                     sh "inspec exec \
                         --chef-license accept-silent \
                         -t ssh://devops:devops@192.168.33.37 \
-                        --reporter cli junit:artifacts/testresults.xml
+                        --reporter cli junit:artifacts/testresults.xml \
                         linux-baseline"
                 }                
             }
