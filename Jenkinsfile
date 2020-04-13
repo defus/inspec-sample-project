@@ -47,7 +47,9 @@ pipeline {
             }
             post {
                 always {
-                    junit 'artifacts/*.xml'
+                    if (findFiles(glob: 'artifacts/*.xml')) {
+                        junit 'artifacts/*.xml'
+                    }
                 }
             }
         }
