@@ -36,7 +36,7 @@ pipeline {
                     } catch (Exception e) {
                         echo("Le build a échoué à cause de inspec")
                     }finally{
-                        sh "sed -i \"s/ classname='\\(.*\\)' target/ classname='\1.192.668.33.37' target/\" artifacts/192.168.33.37.xml"
+                        sh "sed -i \"s/ classname='\\(.*\\)' target/ classname='\\1.192.668.33.37' target/\" artifacts/192.168.33.37.xml"
                     }
 
                     try {
@@ -47,7 +47,7 @@ pipeline {
                     } catch (Exception e) {
                         echo("Le build a échoué à cause de inspec")
                     }finally{
-                        sh "sed -i \"s/ classname='\\(.*\\)' target/ classname='\1.192.668.33.200' target/\" artifacts/192.168.33.200.xml"
+                        sh "sed -i \"s/ classname='\\(.*\\)' target/ classname='\\1.192.668.33.200' target/\" artifacts/192.168.33.200.xml"
                     }
                 }                
             }
