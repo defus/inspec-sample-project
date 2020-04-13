@@ -17,41 +17,45 @@ pipeline {
             agent { label 'linux-security-1' }
             steps {
                 script {
-                    datas = readYaml (file: 'inventaire.yml')
+                    inventaires = readYaml (file: 'inventaire.yml')
 
-                    for (int i = 0; i < datas.size(); i++) {
-                        item = datas[i]
+                    for (int i = 0; i < inventaires.size(); i++) {
+                        server = inventaires[i]
 
-                        checkout([  
-                            $class: 'GitSCM', 
-                            branches: [[name: 'refs/heads/master']], 
-                            doGenerateSubmoduleConfigurations: false, 
-                            extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: item.baseline.dir]], 
-                            submoduleCfg: [], 
-                            userRemoteConfigs: [[url: item.baseline.project]]
-                        ])
-                        
-                        try {
-                            if(item.remote){
-                                sh "inspec exec \
-                                    --chef-license accept-silent \
-                                    ${item.baseline.dir} \
-                                    -t ssh://${item.ssh} \
-                                    --reporter cli junit:artifacts/${item.ip}.xml"
-                            }else{
-                                sh "inspec exec \
-                                    --chef-license accept-silent \
-                                    ${item.baseline.dir} \
-                                    --reporter cli junit:artifacts/${item.ip}.xml"
-                            }
+                        for (int j = 0; j < server.baselines.size(); i++) {
+                            baseline = server.baselines[j]
+
+                            checkout([  
+                                $class: 'GitSCM', 
+                                branches: [[name: 'refs/heads/master']], 
+                                doGenerateSubmoduleConfigurations: false, 
+                                extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: baseline.dir]], 
+                                submoduleCfg: [], 
+                                userRemoteConfigs: [[url: baseline.project]]
+                            ])
                             
-                        } catch (Exception e) {
-                            echo("Le build a échoué à cause de inspec")
-                        }finally{
-                            sh "sed -i \"s/ classname='\\(.*\\)' target/ classname='\\1${item.ip}' target/\" artifacts/${item.ip}.xml"
+                            try {
+                                if(server.remote){
+                                    sh "inspec exec \
+                                        --chef-license accept-silent \
+                                        ${baseline.dir} \
+                                        -t ssh://${server.ssh} \
+                                        --reporter cli junit:artifacts/${server.ip}.xml"
+                                }else{
+                                    sh "inspec exec \
+                                        --chef-license accept-silent \
+                                        ${baseline.dir} \
+                                        --reporter cli junit:artifacts/${server.ip}.xml"
+                                }
+                                
+                            } catch (Exception e) {
+                                echo("Le build a échoué à cause de inspec")
+                            }finally{
+                                sh "sed -i \"s/ classname='\\(.*\\)' target/ classname='\\1.${server.ip}' target/\" artifacts/${baseline.dir}-${server.ip}.xml"
+                            }
                         }
                     }
-                }                
+                }
             }
             post {
                 always {
