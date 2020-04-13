@@ -21,14 +21,14 @@ pipeline {
 
                     for (int i = 0; i < datas.size(); i++) {
                         item = datas[i]
-                        
+
                         checkout([  
                             $class: 'GitSCM', 
                             branches: [[name: 'refs/heads/master']], 
                             doGenerateSubmoduleConfigurations: false, 
-                            extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: ${item.baseline.dir}]], 
+                            extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: item.baseline.dir]], 
                             submoduleCfg: [], 
-                            userRemoteConfigs: [[url: ${item.baseline.project}]]
+                            userRemoteConfigs: [[url: item.baseline.project]]
                         ])
                         
                         try {
