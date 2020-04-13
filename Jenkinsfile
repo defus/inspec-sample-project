@@ -40,12 +40,12 @@ pipeline {
                                         --chef-license accept-silent \
                                         ${baseline.dir} \
                                         -t ssh://${server.ssh} \
-                                        --reporter cli junit:artifacts/${server.ip}.xml"
+                                        --reporter cli junit:artifacts/${baseline.dir}-${server.ip}.xml"
                                 }else{
                                     sh "inspec exec \
                                         --chef-license accept-silent \
                                         ${baseline.dir} \
-                                        --reporter cli junit:artifacts/${server.ip}.xml"
+                                        --reporter cli junit:artifacts/${baseline.dir}-${server.ip}.xml"
                                 }
                                 
                             } catch (Exception e) {
