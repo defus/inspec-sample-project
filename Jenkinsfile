@@ -7,7 +7,9 @@ pipeline {
             agent { label 'linux-security-1' }
             steps {
                 checkout([$class: 'GitSCM',
-                  extensions: scm.extensions + [[$class: 'WipeWorkspace']],])
+                  branches: scm.branches,
+                  extensions: scm.extensions + [[$class: 'WipeWorkspace']],
+                  userRemoteConfigs: scm.userRemoteConfigs])
             }
         }
 
