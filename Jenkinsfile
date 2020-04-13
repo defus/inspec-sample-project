@@ -36,7 +36,7 @@ pipeline {
                     } catch (Exception e) {
                         echo("Le build a échoué à cause de inspec")
                     }finally{
-                         sed -i "s/<testsuite name='\(.*\)' tests/<testsuite name='\1 192.168.33.37' tests/" artifacts/192.168.33.37.xml
+                         sh "sed -i \"s/<testsuite name='\(.*\)' tests/<testsuite name='\1 192.168.33.37' tests/\" artifacts/192.168.33.37.xml"
                     }
 
                     try {
@@ -47,7 +47,7 @@ pipeline {
                     } catch (Exception e) {
                         echo("Le build a échoué à cause de inspec")
                     }finally{
-                        sed -i "s/<testsuite name='\(.*\)' tests/<testsuite name='\1 192.168.33.200' tests/" artifacts/192.168.33.200.xml
+                        sh "sed -i \"s/<testsuite name='\(.*\)' tests/<testsuite name='\1 192.168.33.200' tests/\" artifacts/192.168.33.200.xml"
                     }
                 }                
             }
