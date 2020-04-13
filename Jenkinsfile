@@ -6,6 +6,7 @@ pipeline {
         stage('Checkout') {
             agent { label 'linux-security-1' }
             steps {
+                step([$class: 'WsCleanup'])
                 checkout([$class: 'GitSCM'])
             }
         }
