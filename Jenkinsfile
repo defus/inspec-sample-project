@@ -48,7 +48,7 @@ pipeline {
                         } catch (Exception e) {
                             echo("Le build a échoué à cause de inspec")
                         }finally{
-                            sh "sed -i \"s/ classname='\\(.*\\)' target/ classname='\\${item.ip}' target/\" artifacts/${item.ip}.xml"
+                            sh "sed -i \"s/ classname='\\(.*\\)' target/ classname='\\1${item.ip}' target/\" artifacts/${item.ip}.xml"
                         }
                     }
                 }                
