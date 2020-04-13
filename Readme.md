@@ -32,3 +32,9 @@ Définir la liste des serveurs dans le fichier inventaires du projet sécurité.
     - project: https://github.com/dev-sec/postgres-baseline.git
       dir: postgres-baseline
 ```
+
+## Exemple d'analyse
+
+![Exemple d'analyse avec le plugin digitl ocean](/docs/analyse.PNG "Exemple d'analyse avec le plugin digitl ocean")
+
+![Exemple d'analyse avec le plugin Junit](/docs/analyse2.PNG "Exemple d'analyse avec le plugin digitl ocean")
