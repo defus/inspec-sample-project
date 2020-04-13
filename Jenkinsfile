@@ -19,7 +19,9 @@ pipeline {
                 script {
                     datas = readYaml (file: 'inventaire.yml')
 
-                    datas.each { item -->
+                    for (int i = 0; i < datas.size(); i++) {
+                        item = datas[i]
+                        
                         checkout([  
                             $class: 'GitSCM', 
                             branches: [[name: 'refs/heads/master']], 
