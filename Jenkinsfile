@@ -41,7 +41,6 @@ pipeline {
                         sh "inspec exec \
                             --chef-license accept-silent \
                             linux-baseline \
-                            -t ssh://devops:devops@192.168.33.200 \
                             --reporter cli junit:artifacts/192.168.33.200.xml"
                     } catch (Exception e) {
                         echo("Le build a échoué à cause de inspec")
