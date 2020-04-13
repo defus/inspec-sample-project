@@ -22,7 +22,7 @@ pipeline {
                     for (int i = 0; i < inventaires.size(); i++) {
                         server = inventaires[i]
 
-                        for (int j = 0; j < server.baselines.size(); i++) {
+                        for (int j = 0; j < server.baselines.size(); j++) {
                             baseline = server.baselines[j]
 
                             checkout([  
