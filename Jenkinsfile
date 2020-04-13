@@ -32,11 +32,19 @@ pipeline {
                         ])
                         
                         try {
-                            sh "inspec exec \
-                                --chef-license accept-silent \
-                                ${item.baseline.dir} \
-                                -t ssh://${item.ssh} \
-                                --reporter cli junit:artifacts/${item.ip}.xml"
+                            if(item.remote){
+                                sh "inspec exec \
+                                    --chef-license accept-silent \
+                                    ${item.baseline.dir} \
+                                    -t ssh://${item.ssh} \
+                                    --reporter cli junit:artifacts/${item.ip}.xml"
+                            }else{
+                                sh "inspec exec \
+                                    --chef-license accept-silent \
+                                    ${item.baseline.dir} \
+                                    --reporter cli junit:artifacts/${item.ip}.xml"
+                            }
+                            
                         } catch (Exception e) {
                             echo("Le build a échoué à cause de inspec")
                         }finally{

@@ -1,10 +1,11 @@
-- ssh: devops:devops@192.168.33.37
+- remote: true
+  ssh: devops:devops@192.168.33.37
   ip: 192.168.33.37
   baseline:
     project: https://github.com/dev-sec/linux-baseline.git
     dir: linux-baseline
-- ssh: 192.168.33.200
-  ip: 192.168.33.37
+- remote: false
+  ip: 192.168.33.200
   baseline:
     project: https://github.com/dev-sec/linux-baseline.git
     dir: linux-baseline
