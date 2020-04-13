@@ -34,7 +34,7 @@ pipeline {
                             -t ssh://devops:devops@192.168.33.37 \
                             --reporter cli junit:artifacts/192.168.33.37.xml"
                     } catch (Exception e) {
-                        error("Le build a échoué à cause de inspec")
+                        echo("Le build a échoué à cause de inspec")
                     }
 
                     try {
@@ -44,7 +44,7 @@ pipeline {
                             -t ssh://devops:devops@192.168.33.200 \
                             --reporter cli junit:artifacts/192.168.33.200.xml"
                     } catch (Exception e) {
-                        error("Le build a échoué à cause de inspec")
+                        echo("Le build a échoué à cause de inspec")
                     }
                 }                
             }
